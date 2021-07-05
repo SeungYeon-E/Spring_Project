@@ -1,10 +1,13 @@
 package com.spring.bbs.project.command;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.ui.Model;
 
 import com.spring.bbs.project.dao.AdminUserdao;
 import com.spring.bbs.project.dto.AdminUserdto;
@@ -15,12 +18,16 @@ public class AdminuserSearchCommand implements Command {
 		int numOfTuplesPerPage = 10;
 
 		@Override
-		public void execute(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		public void execute(Model model, HttpSession httpSession) {
+			
+			Map<String, Object> map = model.asMap();
+			HttpServletRequest request = (HttpServletRequest) map.get("request");
+			
 			// DB에서 전체정보 읽어서 attribute로 jsp에 전달하기
 			// 사용자가 요청한 페이지 번호 초기값은 가장 최신글을 보여주는 1
 			int requestPage = 1;
 			AdminUserdao dao = new AdminUserdao();
-			session = request.getSession();
+			httpSession = request.getSession();
 			String searching = request.getParameter("searched");
 
 			// 최초 목록 진입시 page값을 넘겨주지 않음 -> 초기값인 1페이지 목록을 보여줌
@@ -28,7 +35,7 @@ public class AdminuserSearchCommand implements Command {
 			if (request.getParameter("page") != null) {
 				requestPage = Integer.parseInt(request.getParameter("page"));
 				// content에서 목록보기 요청시 최근 페이지 목록으로 돌아가기 위해 세션에 저
-				session.setAttribute("courrentPage", requestPage);
+				httpSession.setAttribute("courrentPage", requestPage);
 			}
 
 			// 반환되는 총 튜플의 수
@@ -37,11 +44,12 @@ public class AdminuserSearchCommand implements Command {
 			// 페이지 목록 (1...n)
 			ArrayList<Integer> pageList = calcNumOfPage(countedTuple);
 			// 페이지 목록을 세션에 담는다. *list에 진입하면 무조건 세션이 갱신되므로 새 글이 생겨도 최신화가 된다.
-			session.setAttribute("pageList", pageList);
+			httpSession.setAttribute("pageList", pageList);
 			// 해당 페이지에 알맞은 번호의 게시글
 			ArrayList<AdminUserdto> dtos = dao.userSelect2(searching, requestPage, numOfTuplesPerPage);
 			// request에 게시글들을 태워 보낸다.
-			request.setAttribute("user_list", dtos);
+//			request.setAttribute("user_list", dtos);
+			model.addAttribute("user_list", dtos);
 		}
 
 		// 총 튜플수를 받아 페이지당 표시할 게시글의 수로 나누어서 페이지수를 계산하고 jsp에서 for-each문을 돌리기 위해 배열에 담는다

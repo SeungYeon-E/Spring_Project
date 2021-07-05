@@ -31,7 +31,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-	<form action="TipCommentModify.do" name="commenttext" method="post">
+	<form action="TipCommentModify" name="commenttext" method="post">
 		<div class="container">
 			<div>
 				<input type="hidden" name="tc_num" size="20" value="${commentcontent_view.tc_num}">

@@ -13,7 +13,7 @@ function fail() {
 	window.close();
 }
 function succ() {
-	window.opener.location.href="profile.do";
+	window.opener.location.href="profile";
 	alert("삭제 되었습니다.");
 	window.close();
 }

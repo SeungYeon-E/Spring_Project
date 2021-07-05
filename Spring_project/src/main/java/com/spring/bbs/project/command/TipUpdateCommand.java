@@ -30,7 +30,7 @@ public class TipUpdateCommand implements Command {
 		
 		// 파일크기 제한 설정 (15mb)
 		int sizeLimit1 = 15 * 1024 * 1024;
-		ServletContext context = request.getServletContext();
+		ServletContext context = ((HttpSession) request).getServletContext();
 		String realPath1 = context.getRealPath(cv.jsp_project_filepath);
 		
 		 //위 경로의 디렉토리가 존재하지 않으면 새로 생성 

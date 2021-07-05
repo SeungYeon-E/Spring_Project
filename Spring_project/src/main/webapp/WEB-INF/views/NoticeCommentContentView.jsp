@@ -31,7 +31,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-	<form action="NoticeCommentModify.do" name="commenttext" method="post">
+	<form action="NoticeCommentModify" name="commenttext" method="post">
 		<div class="container">
 			<div>
 				<input type="hidden" name="nc_num" size="20" value="${commentcontent_view.nc_num}">

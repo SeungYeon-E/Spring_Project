@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@include file="/Header.jsp"%>
+<%@include file="Header.jsp"%>
 <!-- 이거쓰는거 잊지마 라이브러리 실행 안된다.. -->
 <!DOCTYPE html>
 <html>
@@ -19,7 +19,7 @@
 		var retVal = confirm("게시물 삭제하시겠습니까?");
 		if (retVal == true) {
 			var t_num = document.getElementById("deletecontent").value;
-			var url = "ContentViewTipdelete.do?t_num=" + t_num;
+			var url = "ContentViewTipdelete?t_num=" + t_num;
 			open(url,"deleteContent","roolbar=no, location=no,menubar=no,scrollbars=no,resizable=no,width=450,height=230");
 		} else {
 			return false;
@@ -75,7 +75,7 @@
 		var t_num = document.getElementById("t_num").value;
 		var tc_content = document.getElementById("commenttext").value;
 		if (retVal == true) {
-			var url = "TipCommentWrite.do?tc_content=" + tc_content + "&t_num=" + t_num;
+			var url = "TipCommentWrite?tc_content=" + tc_content + "&t_num=" + t_num;
 			open(url,"writeComment","roolbar=no, location=no,menubar=no,scrollbars=no,resizable=no,width=450,height=230");
 		} else {
 			return false;
@@ -83,14 +83,14 @@
 	}
 	/* 댓글 수정 */
 	function modifyComment(tc_num) {
-		var url = "TipCommentContent.do?tc_num=" + tc_num;
+		var url = "TipCommentContent?tc_num=" + tc_num;
 		open(url,"ModifyComment","roolbar=no, location=no,menubar=no,scrollbars=no,resizable=no,width=450,height=230");
 	}
 	/* 댓글 삭제 */
 	function deleteComment(tc_num) {
 		var retVal = confirm("댓글 삭제하시겠습니까?");
 		if (retVal == true) {
-			var url = "TipCommentDelete.do?tc_num=" + tc_num;
+			var url = "TipCommentDelete?tc_num=" + tc_num;
 			open(url,"deleteComment","roolbar=no, location=no,menubar=no,scrollbars=no,resizable=no,width=450,height=230");
 		} else {
 			return false;
@@ -148,7 +148,7 @@ div {
 	<!-- 상세페이지 -->
 	<div class="container">
 		<br /> <br />
-		<form action="TipContentBoard.do" method="post">
+		<form action="TipContentBoard" method="post">
 			<h3 class="m-2">
 			<input type="hidden" name="t_num" id="t_num" value="${content_view.t_num}">
 				<b>${content_view.t_title}</b>
@@ -157,18 +157,18 @@ div {
 
 			<h6 class="m-2">
 				
-				By <a href="userProfile.do?">${content_view.name }</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				By <a href="userProfile?">${content_view.name }</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				Date <i>${content_view.tw_regist}</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				Views <i>${content_view.t_hits}</i>
 			</h6>
 			<div>
 				<input type="submit" value="수정" id="modifyContent" class="btn btn-primary pull-right">&nbsp;&nbsp;&nbsp;
-				<a href="list2.do" class="btn btn-primary pull-right">목록</a>&nbsp;&nbsp;&nbsp;
+				<a href="list2" class="btn btn-primary pull-right">목록</a>&nbsp;&nbsp;&nbsp;
 				<button type="button" onclick="deleteContent()" id="deletecontent" value="${content_view.t_num}" class="btn btn-primary pull-right">삭제</button>
 			</div>
 			<hr />
 			<div class="form-group">
-				<div class="m-2"><img width="300" src="${content_view.t_image}" /></div>
+				<div class="m-2"><img width="300" src="${pageContext.request.contextPath }/resources/${content_view.t_image}" /></div>
 				<div class="m-2">${content_view.t_content}</div>
 			</div>
 		</form>
@@ -219,7 +219,7 @@ div {
 									<tr>
 										<td colspan="4" align="center">
 											<c:forEach items="${pageList }" var="page">
-												<a href="ContentViewItem.do?t_num=${content_view.t_num}&page=${page }">${page }</a>
+												<a href="ContentViewItem?t_num=${content_view.t_num}&page=${page }">${page }</a>
 											</c:forEach></td>
 									</tr>
 								</table>
@@ -238,4 +238,4 @@ div {
 	</div>
 </body>
 </html>
-<%@include file="/Footer.jsp"%>
+<%@include file="Footer.jsp"%>

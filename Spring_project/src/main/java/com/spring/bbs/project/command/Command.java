@@ -1,12 +1,13 @@
 package com.spring.bbs.project.command;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.ui.Model;
+
 public interface Command {
-	public void execute(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException;
+	
+	public void execute(Model model, HttpSession httpSession);
+
 }
 

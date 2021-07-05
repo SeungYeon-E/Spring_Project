@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@include file="/Header.jsp"%>
+<%@include file="Header.jsp"%>
 <!-- 이거쓰는거 잊지마 라이브러리 실행 안된다.. -->
 <!DOCTYPE html>
 <html>
@@ -16,7 +16,7 @@
 		var retVal = confirm("게시물 삭제하시겠습니까?");
 		if (retVal == true) {
 			var i_num = document.getElementById("deletecontent").value;
-			var url = "ContentViewItemdelete.do?i_num=" + i_num;
+			var url = "ContentViewItemdelete?i_num=" + i_num;
 			open(url,"deleteContent","roolbar=no, location=no,menubar=no,scrollbars=no,resizable=no,width=450,height=230");
 		} else {
 			return false;
@@ -72,7 +72,7 @@
 		var i_num = document.getElementById("i_num").value;
 		var ic_content = document.getElementById("commenttext").value;
 		if (retVal == true) {
-			var url = "CommentWriteItem.do?ic_content=" + ic_content + "&i_num=" + i_num;
+			var url = "CommentWriteItem?ic_content=" + ic_content + "&i_num=" + i_num;
 			open(url,"writeComment","roolbar=no, location=no,menubar=no,scrollbars=no,resizable=no,width=450,height=230");
 		} else {
 			return false;
@@ -80,14 +80,14 @@
 	}
 	/* 댓글 수정 */
 	function modifyComment(ic_num) {
-		var url = "CommentContentItem.do?ic_num=" + ic_num;
+		var url = "CommentContentItem?ic_num=" + ic_num;
 		open(url,"ModifyComment","roolbar=no, location=no,menubar=no,scrollbars=no,resizable=no,width=450,height=230");
 	}
 	/* 댓글 삭제 */
 	function deleteComment(ic_num) {
 		var retVal = confirm("댓글 삭제하시겠습니까?");
 		if (retVal == true) {
-			var url = "CommentDeleteItem.do?ic_num=" + ic_num;
+			var url = "CommentDeleteItem?ic_num=" + ic_num;
 			open(url,"deleteComment","roolbar=no, location=no,menubar=no,scrollbars=no,resizable=no,width=450,height=230");
 		} else {
 			return false;
@@ -145,7 +145,7 @@ div {
 	<!-- 상세페이지 -->
 	<div class="container">
 		<br /> <br />
-		<form action="ItemInfoContent.do" method="get">
+		<form action="ItemInfoContent" method="get">
 			<h3 class="m-2">
 				<input type="hidden" name="i_num" value="${content_view.i_num}">
 				<b>${content_view.i_title}</b>
@@ -153,18 +153,18 @@ div {
 			<br />
 
 			<h6 class="m-2">
-				By <a href="userProfile.do?">${content_view.name }</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				By <a href="userProfile?">${content_view.name }</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				Date <i>${content_view.iw_regist}</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				Views <i>${content_view.i_hits}</i>
 			</h6>
 			<div>
 				<input type="submit" value="수정" id="modifyContent" class="btn btn-primary pull-right">&nbsp;&nbsp;&nbsp;
-				<a href="list.do" class="btn btn-primary pull-right">목록</a>&nbsp;&nbsp;&nbsp;
+				<a href="list" class="btn btn-primary pull-right">목록</a>&nbsp;&nbsp;&nbsp;
 				<button type="button" onclick="deleteContent()" id="deletecontent" value="${content_view.i_num}" class="btn btn-primary pull-right">삭제</button>
 			</div>
 			<hr />
 			<div class="form-group">
-				<div class="m-2"><img width="300" src="${content_view.i_image }" /></div>
+				<div class="m-2"><img width="300" src="${pageContext.request.contextPath }/resources/${content_view.i_image }" /></div>
 				<div class="m-2">${content_view.i_content}</div>
 			</div>
 		</form>
@@ -215,7 +215,7 @@ div {
 									<tr>
 										<td colspan="4" align="center">
 											<c:forEach items="${pageList }" var="page">
-												<a href="ContentViewItem.do?i_num=${content_view.i_num}&page=${page }">${page }</a>
+												<a href="ContentViewItem?i_num=${content_view.i_num}&page=${page }">${page }</a>
 											</c:forEach></td>
 									</tr>
 								</table>
@@ -234,4 +234,4 @@ div {
 	</div>
 </body>
 </html>
-<%@include file="/Footer.jsp"%>
+<%@include file="Footer.jsp"%>

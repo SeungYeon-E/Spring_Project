@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 import com.spring.bbs.project.dto.ContentItemdto;
 
 public class ContentItemdao {
+	
 	DataSource dataSource;
 
 	public ContentItemdao() {

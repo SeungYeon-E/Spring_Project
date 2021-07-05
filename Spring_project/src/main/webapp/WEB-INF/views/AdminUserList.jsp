@@ -27,7 +27,7 @@ function buttonHide() {
 function deleteUser(user_email) {
 	var retVal = confirm("회원 탈퇴하시겠습니까?");
 	if (retVal == true) {
-		var url = "AdminUserDelete.do?user_email=" + user_email;
+		var url = "AdminUserDelete?user_email=" + user_email;
 		open(url,"AdminUserDelete","roolbar=no, location=no,menubar=no,scrollbars=no,resizable=no,width=450,height=230");
 	} else {
 		return false;
@@ -37,7 +37,7 @@ function deleteUser(user_email) {
 function recoverUser(user_email) {
 	var retVal = confirm("회원 복구하시겠습니까?");
 	if (retVal == true) {
-		var url = "AdminUserRecover.do?user_email=" + user_email;
+		var url = "AdminUserRecover?user_email=" + user_email;
 		open(url,"AdminUserRecover","roolbar=no, location=no,menubar=no,scrollbars=no,resizable=no,width=450,height=230");
 	} else {
 		return false;
@@ -136,7 +136,7 @@ div {
 	<h3>회원관리</h3>
 	<br>
 	<br>
-		<form action="AdminUserSearch.do" method="post">
+		<form action="AdminUserSearch" method="post">
 			<div class="search">
     			<script src="https://kit.fontawesome.com/8eb5905426.js" crossorigin="anonymous"></script>
     			<input type="text" name="searched" placeholder="&#xf002; search" >
@@ -185,7 +185,7 @@ div {
 		<tr>
 			<td colspan="9" align="center">
 				<c:forEach items="${pageList }" var="page">
-					<a href="AdminUserlist.do?page=${page }">${page }</a>
+					<a href="AdminUserlist?page=${page }">${page }</a>
 				</c:forEach>
 			</td>
 		</tr>
@@ -193,4 +193,4 @@ div {
 	<script type="text/javascript">buttonHide();</script>
 </body>
 </html>
-<%@include file="/Footer.jsp"%>
+<%@include file="Footer.jsp"%>

@@ -1,10 +1,13 @@
 package com.spring.bbs.project.command;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.ui.Model;
 
 import com.spring.bbs.project.dao.ItemInfoDao;
 import com.spring.bbs.project.dao.TipDao;
@@ -17,8 +20,10 @@ public class TipContentCommand implements Command {
 	FilePath  cv = new FilePath();
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response, HttpSession session)
-			throws IOException {
+	public void execute(Model model, HttpSession httpSession) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
 		String T_NUM =request.getParameter("t_num");
 		TipDao tipDao = new TipDao();
@@ -30,7 +35,8 @@ public class TipContentCommand implements Command {
 			String fileName = filePath.substring(cv.jsp_project_filepath.length() + 1);
 			request.setAttribute("fileName", fileName);
 		}
-		request.setAttribute("read", tipDto);
+//		request.setAttribute("read", tipDto);
+		model.addAttribute("read", tipDto);
 
 	}
 

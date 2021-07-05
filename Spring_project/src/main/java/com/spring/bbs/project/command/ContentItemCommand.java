@@ -1,10 +1,13 @@
 package com.spring.bbs.project.command;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.ui.Model;
 
 import com.spring.bbs.project.dao.ContentItemdao;
 import com.spring.bbs.project.dao.ViewsDao;
@@ -15,7 +18,10 @@ public class ContentItemCommand implements Command {
 	int numOfTuplesPerPage = 5;
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	public void execute(Model model, HttpSession httpSession) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		// TODO Auto-generated method stub
 		// DB에서 전체정보 읽어서 attribute로 jsp에 전달하기
 		// 사용자가 요청한 페이지 번호 초기값은 가장 최신글을 보여주는 1
@@ -31,13 +37,13 @@ public class ContentItemCommand implements Command {
 		// 클릭된 게시물 상세페이지 보여주기
 		ContentItemdto dto = dao.contentView(i_num);
 		request.setAttribute("content_view", dto);
-		session.setAttribute("stranger", dto.getuser_email());
+		httpSession.setAttribute("stranger", dto.getuser_email());
 		// 최초 목록 진입시 page값을 넘겨주지 않음 -> 초기값인 1페이지 목록을 보여줌
 		// 목록에서 page요청 -> 해당 페이지 번호로 requestPage 설정
 		if (request.getParameter("page") != null) {
 			requestPage = Integer.parseInt(request.getParameter("page"));
 			// content에서 목록보기 요청시 최근 페이지 목록으로 돌아가기 위해 세션에 저
-			session.setAttribute("courrentPage", requestPage);
+			httpSession.setAttribute("courrentPage", requestPage);
 		}
 
 		// 반환되는 총 튜플의 수
@@ -45,11 +51,12 @@ public class ContentItemCommand implements Command {
 		// 페이지 목록 (1...n)
 		ArrayList<Integer> pageList = calcNumOfPage(countedTuple);
 		// 페이지 목록을 세션에 담는다. *list에 진입하면 무조건 세션이 갱신되므로 새 글이 생겨도 최신화가 된다.
-		session.setAttribute("pageList", pageList);
+		httpSession.setAttribute("pageList", pageList);
 		// 해당 페이지에 알맞은 번호의 게시글
 		ArrayList<ContentItemdto> dtos = dao.commentSelect(i_num, requestPage, numOfTuplesPerPage);
 		// request에 게시글들을 태워 보낸다.
-		request.setAttribute("comment_view", dtos);
+//		request.setAttribute("comment_view", dtos);
+		model.addAttribute("comment_view", dtos);
 
 	}
 
