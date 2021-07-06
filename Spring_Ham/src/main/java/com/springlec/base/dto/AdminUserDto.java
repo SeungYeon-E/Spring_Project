@@ -1,23 +1,24 @@
-package com.spring.bbs.project.dto;
+package com.springlec.base.dto;
 
 import java.sql.Date;
 
-public class AdminUserdto {
+public class AdminUserDto {
 	
-	String email;
-	String name;
-	String adress;
-	String tel;
-	String git;
-	Date createdate;
-	Date deletedate;
-	int admin;
+	private String email;
+	private String name;
+	private String pwd;
+	private String adress;
+	private String tel;
+	private String git;
+	private Date createdate;
+	private Date deletedate;
+	private int admin;
 	
-	public AdminUserdto() {
+	public AdminUserDto() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public AdminUserdto(String email, String name, String adress, String tel, String git, Date createdate,
+	public AdminUserDto(String email, String name, String pwd, String adress, String tel, String git, Date createdate,
 			Date deletedate, int admin) {
 		super();
 		this.email = email;

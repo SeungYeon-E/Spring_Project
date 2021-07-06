@@ -1,4 +1,4 @@
-package com.spring.bbs.project.command;
+package com.springlec.base.command;
 
 import javax.servlet.http.HttpSession;
 

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
 import com.spring.bbs.project.dao.AdminUserdao;
@@ -18,7 +19,7 @@ public class AdminuserSearchCommand implements Command {
 		int numOfTuplesPerPage = 10;
 
 		@Override
-		public void execute(Model model, HttpSession httpSession) {
+		public void execute(Model model, HttpSession httpSession, SqlSession sqlSession) {
 			
 			Map<String, Object> map = model.asMap();
 			HttpServletRequest request = (HttpServletRequest) map.get("request");

@@ -13,7 +13,7 @@ import com.spring.bbs.project.dao.AdminUserdao;
 public class AdminUserRecoverCommand implements Command {
 
 	@Override
-	public void execute(Model model, HttpSession httpSession) {
+	public void execute(Model model, HttpSession httpSession, SqlSession sqlSession) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");

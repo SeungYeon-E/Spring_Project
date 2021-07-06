@@ -1,15 +1,14 @@
-package com.spring.bbs.project.command;
+package com.springlec.base.command;
 
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
-import com.spring.bbs.project.dao.AdminUserDao;
+import com.springlec.base.dao.AdminUserDao;
 
 public class AdminUserDeleteCommand implements Command {
 
@@ -24,11 +23,18 @@ public class AdminUserDeleteCommand implements Command {
 		
 		AdminUserDao dao = sqlSession.getMapper(AdminUserDao.class);
 		
-//		String result = dao.userDelete(user_email);
+		int result = dao.userDelete(user_email);
+		String result1 = "false";
+		System.out.println(result);
+		
+		if(result == 0){
+			result1 = "false";
+		}else {
+			result1 = "true";
+		}
 		
 //		request.setAttribute("result", result);
-		 
-		model.addAttribute("result", dao.userDelete(user_email));
+		model.addAttribute("result", result1);
 		
 	}
 

@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace = "com.springlec.addressbook.dao.IDao">
+<!-- <mapper namespace = "com.springlec.addressbook.dao.IDao">
 	
 	<select id="listDao" resultType="com.springlec.addressbook.dto.ContentDto">
 		SELECT * FROM ADDRESSBOOK ORDER BY AID DESC
@@ -30,4 +30,4 @@
 	</select>
 	
 
-</mapper>
+</mapper> -->

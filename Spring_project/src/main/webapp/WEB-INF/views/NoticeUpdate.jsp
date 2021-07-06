@@ -1,6 +1,6 @@
-<%@page import="com.spring.bbs.project.dto.NoticeDto"%>
-<%@page import="com.spring.bbs.project.command.NoticeInsertCommand"%>
-<%@page import="com.spring.bbs.project.dao.NoticeDao"%>
+<%@page import="com.spring.bbs.project_Ham.dto.NoticeDto"%>
+<%@page import="com.spring.bbs.project_Ham.command.NoticeInsertCommand"%>
+<%@page import="com.spring.bbs.project_Ham.dao.NoticeDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
       <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
