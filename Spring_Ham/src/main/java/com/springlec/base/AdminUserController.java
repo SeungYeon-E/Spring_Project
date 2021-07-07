@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.springlec.base.command.AdminUserDeleteCommand;
 import com.springlec.base.command.AdminUserRecoverCommand;
 import com.springlec.base.command.AdminUserlistCommand;
+import com.springlec.base.command.AdminuserSearchCommand;
 import com.springlec.base.command.Command;
+import com.springlec.base.dao.AdminUserDao;
 
 
 @Controller
@@ -31,7 +33,8 @@ public class AdminUserController {
 	 */
 	// adminuser - list 불러오기
 	@RequestMapping("/AdminUserlist")
-	public String AdminUserlist(HttpServletRequest request, Model model, HttpSession httpSession) {
+	public String AdminUserlist(HttpServletRequest request, Model model) {
+		HttpSession httpSession = request.getSession();
 		model.addAttribute("request", request);
 		command = new AdminUserlistCommand();
 		command.execute(model, httpSession, sqlSession);
@@ -39,7 +42,8 @@ public class AdminUserController {
 	}
 	
 	@RequestMapping("/AdminUserDelete")
-	public String AdminUserDelete(HttpServletRequest request, Model model, HttpSession httpSession) {
+	public String AdminUserDelete(HttpServletRequest request, Model model) {
+		HttpSession httpSession = request.getSession();
 		model.addAttribute("request", request);
 		command = new AdminUserDeleteCommand();
 		command.execute(model, httpSession, sqlSession);
@@ -47,22 +51,21 @@ public class AdminUserController {
 	}
 	
 	@RequestMapping("/AdminUserRecover")
-	//세션쓰면 같이 넣어줘
-	public String AdminUserRecover(HttpServletRequest request, Model model, HttpSession httpSession) {
+	public String AdminUserRecover(HttpServletRequest request, Model model) {
+		HttpSession httpSession = request.getSession();
 		model.addAttribute("request", request);
 		command = new AdminUserRecoverCommand();
 		command.execute(model, httpSession, sqlSession);
 		return "AdminUserRecoverView";
 	}
 	
-//	@RequestMapping("/AdminUserSearch")
-//	//세션쓰면 같이 넣어줘
-//	public String AdminUserSearch(HttpServletRequest request, Model model, HttpSession httpSession) {
-////		model.addAttribute("request", request);
-//		command = new AdminuserSearchCommand();
-//		command.execute(model, httpSession, sqlSession);
-//		return "AdminUserList";
-//	}
-//	
+	@RequestMapping("/AdminUserSearch")
+	public String AdminUserSearch(HttpServletRequest request, Model model) {
+		HttpSession httpSession = request.getSession();
+		model.addAttribute("request", request);
+		command = new AdminuserSearchCommand();
+		command.execute(model, httpSession, sqlSession);
+		return "AdminUserList";
+	}
 	
 }

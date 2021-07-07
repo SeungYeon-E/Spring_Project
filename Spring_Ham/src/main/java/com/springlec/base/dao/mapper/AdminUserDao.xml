@@ -9,7 +9,7 @@
 		SELECT * FROM USER ORDER BY CREATEDATE DESC LIMIT #{param1}, #{param2}
 	</select>
 
-	<select id="selectUserCnt" resultType="int">
+	<select id="selectUserCnt" resultType="Integer">
 		SELECT COUNT(*) FROM USER
 	</select>
 	
@@ -20,5 +20,13 @@
 	<update id="userRecover">
 		UPDATE USER SET DELETEDATE = NULL WHERE EMAIL = #{param1}
 	</update>
+	
+	<select id="userSelect2" resultType="com.springlec.base.dto.AdminUserDto">
+		SELECT * FROM USER WHERE NAME LIKE CONCAT('%', #{param1}, '%') OR EMAIL LIKE CONCAT('%', #{param1}, '%') ORDER BY CREATEDATE DESC LIMIT #{param2}, #{param3}
+	</select>
+	
+	<select id="selectUserCnt2" resultType="int">
+		SELECT COUNT(*) FROM USER WHERE NAME LIKE CONCAT('%', #{param1}, '%') OR EMAIL LIKE CONCAT('%', #{param1}, '%')
+	</select>
 	
  </mapper>

@@ -52,11 +52,11 @@ public class AdminUserlistCommand implements Command {
 		
 		int offset = requestPage-1;
 		
-		if (offset == 0) {
+		if (offset != 0) {
 			offset *= numOfTuplesPerPage;
 		}
 		
-		model.addAttribute("user_list", dao.userSelect(requestPage, numOfTuplesPerPage));
+		model.addAttribute("user_list", dao.userSelect(offset, numOfTuplesPerPage));
 	}
 
 	// 총 튜플수를 받아 페이지당 표시할 게시글의 수로 나누어서 페이지수를 계산하고 jsp에서 for-each문을 돌리기 위해 배열에 담는다
