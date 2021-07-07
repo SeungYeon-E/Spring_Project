@@ -21,7 +21,7 @@ function succ() {
 <body>
 	<c:set var="result" value="${result}"/><!-- 변수선언 -->
 	<c:choose>
-		<c:when test="${result eq 'true'}"><%-- ${result == 'true'} --%>
+		<c:when test="${result >= 1}"><%-- ${result == 'true'} --%>
 			<script type="text/javascript">succ();</script>
 		</c:when>
 		<c:otherwise>

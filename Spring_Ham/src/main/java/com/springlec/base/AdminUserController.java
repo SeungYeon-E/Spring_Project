@@ -9,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.springlec.base.command.AdminUserDeleteCommand;
-import com.springlec.base.command.AdminUserRecoverCommand;
 import com.springlec.base.command.AdminUserlistCommand;
 import com.springlec.base.command.AdminuserSearchCommand;
 import com.springlec.base.command.Command;
@@ -24,8 +22,6 @@ public class AdminUserController {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	
-	
 	/*
 	 * ----------------------------- 
 	 * 21.07.05 seungyeon adminuser 상세페이지 
@@ -43,19 +39,15 @@ public class AdminUserController {
 	
 	@RequestMapping("/AdminUserDelete")
 	public String AdminUserDelete(HttpServletRequest request, Model model) {
-		HttpSession httpSession = request.getSession();
-		model.addAttribute("request", request);
-		command = new AdminUserDeleteCommand();
-		command.execute(model, httpSession, sqlSession);
+		AdminUserDao dao = sqlSession.getMapper(AdminUserDao.class);
+		model.addAttribute("result", dao.userDelete(request.getParameter("user_email")));
 		return "AdminUserDeleteView";
 	}
 	
 	@RequestMapping("/AdminUserRecover")
 	public String AdminUserRecover(HttpServletRequest request, Model model) {
-		HttpSession httpSession = request.getSession();
-		model.addAttribute("request", request);
-		command = new AdminUserRecoverCommand();
-		command.execute(model, httpSession, sqlSession);
+		AdminUserDao dao = sqlSession.getMapper(AdminUserDao.class);
+		model.addAttribute("result", dao.userRecover(request.getParameter("user_email")));
 		return "AdminUserRecoverView";
 	}
 	

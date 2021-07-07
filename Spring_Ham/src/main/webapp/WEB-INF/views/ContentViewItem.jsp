@@ -7,9 +7,8 @@
 <html>
 <script type="text/javascript">
 	
-	var myEmail = '<%=(String) session.getAttribute("email")%>';
-	<%-- var Admin = '<%=(String) session.getAttribute("admin")%>'; --%>
-	var Admin = '1';
+	var myEmail = '<%=session.getAttribute("email")%>';
+	var Admin = '<%=session.getAttribute("admin")%>';
 	console.log("myEmail=" + myEmail);
 
 	/* 게시물 삭제 */

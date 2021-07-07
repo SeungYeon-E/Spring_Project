@@ -9,12 +9,12 @@
 </head>
 <script type="text/javascript">
 function fail() {
-	alert("회원복구 문제가 발생했습니다.");
+	alert("댓글입력에 문제가 발생했습니다.");
 	window.close();
 }
 function succ() {
 	window.opener.location.reload();
-	alert("회원복구 되었습니다.");
+	alert("댓글이 입력되었습니다.");
 	window.close();
 }
 </script>

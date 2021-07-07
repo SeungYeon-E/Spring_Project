@@ -51,7 +51,7 @@ public class ContentItemCommand implements Command {
 		if (request.getParameter("page") != null) {
 			requestPage = Integer.parseInt(request.getParameter("page"));
 			// content에서 목록보기 요청시 최근 페이지 목록으로 돌아가기 위해 세션에 저
-			httpSession.setAttribute("courrentPage", requestPage);
+			model.addAttribute("courrentPage", requestPage);
 		}
 
 		// 반환되는 총 튜플의 수

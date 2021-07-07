@@ -1,16 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@include file="../../WEB-INF/views/Header.jsp"%>
+<%@include file="Header.jsp"%>
 <!-- 이거쓰는거 잊지마 라이브러리 실행 안된다.. -->
 <!DOCTYPE html>
 <html>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-	$(document).ready(function() {
-	    alert('게시물 입력 완료했습니다.');
-	});
-</script>
 <script type="text/javascript">
 	
 	var myEmail = '<%=(String) session.getAttribute("email")%>';
@@ -153,25 +147,27 @@ div {
 	<!-- 상세페이지 -->
 	<div class="container">
 		<br /> <br />
-		<form action="" method="post">
+		<form action="TipContentBoard" method="post">
 			<h3 class="m-2">
+			<input type="hidden" name="t_num" id="t_num" value="${content_view.t_num}">
 				<b>${content_view.t_title}</b>
 			</h3>
 			<br />
 
 			<h6 class="m-2">
-				By <a href="content_view?user_email=${content_view.user_email }">${content_view.name }</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+				By <a href="userProfile?">${content_view.name }</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				Date <i>${content_view.tw_regist}</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				Views <i>${content_view.t_hits}</i>
 			</h6>
 			<div>
 				<input type="submit" value="수정" id="modifyContent" class="btn btn-primary pull-right">&nbsp;&nbsp;&nbsp;
-				<a href="list" class="btn btn-primary pull-right">목록</a>&nbsp;&nbsp;&nbsp;
+				<a href="list2" class="btn btn-primary pull-right">목록</a>&nbsp;&nbsp;&nbsp;
 				<button type="button" onclick="deleteContent()" id="deletecontent" value="${content_view.t_num}" class="btn btn-primary pull-right">삭제</button>
 			</div>
 			<hr />
 			<div class="form-group">
-				<div class="m-2"><img width="300" src="${content_view.t_image}" /></div>
+				<div class="m-2"><img width="300" src="${pageContext.request.contextPath }/resources/${content_view.t_image}" /></div>
 				<div class="m-2">${content_view.t_content}</div>
 			</div>
 		</form>
@@ -241,4 +237,4 @@ div {
 	</div>
 </body>
 </html>
-<%@include file="../../WEB-INF/views/Footer.jsp"%>
+<%@include file="Footer.jsp"%>
