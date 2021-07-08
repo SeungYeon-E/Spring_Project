@@ -31,6 +31,8 @@ public class ItemContentController {
 	//세션쓰면 같이 넣어줘
 	public String ContentViewItem(HttpServletRequest request, Model model) {
 		HttpSession httpSession = request.getSession();
+		httpSession.setAttribute("email", "123@naver.com");
+		httpSession.setAttribute("admin", "1");
 		model.addAttribute("request", request);
 		command = new ContentItemCommand();
 		command.execute(model, httpSession, sqlSession);
